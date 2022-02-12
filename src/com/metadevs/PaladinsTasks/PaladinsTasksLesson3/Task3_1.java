@@ -2,22 +2,17 @@ package com.metadevs.PaladinsTasks.PaladinsTasksLesson3;
 
 public class Task3_1 {
     public static void main(String[] args) {
-
-        int intMonth;
-        intMonth = (int) (1 + Math.random() * 12);
+        int intMonth = (int) (1 + Math.random() * 12);
 
         if (intMonth == 1 || intMonth == 2 || intMonth == 12) {
             System.out.println("Зима");
         }
-
         if (intMonth == 3 || intMonth == 4 || intMonth == 5) {
             System.out.println("Весна");
         }
-
         if (intMonth == 6 || intMonth == 7 || intMonth == 8) {
             System.out.println("Лето");
         }
-
         if (intMonth == 9 || intMonth == 10 || intMonth == 11) {
             System.out.println("Осень");
         }

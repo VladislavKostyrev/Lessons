@@ -3,10 +3,9 @@ package com.metadevs.PaladinsTasks.PaladinsTasksLesson3;
 public class Task3_3 {
     public static void main(String[] args) {
         int [] numbers = {5, 0, -3, 2};
-        int a;
 
         for (int i = 0; i < numbers.length; i++) {
-            a = numbers[i];
+            int a = numbers[i];
             if (a == 0 || a == 2) {
                 a = a + 7;
             } else {
@@ -16,8 +15,8 @@ public class Task3_3 {
         }
 
         for (int i = 0; i < numbers.length; i++) {
-            a = numbers[i];
-            if (a > 0 && a < 5) {
+            int a = numbers[i];
+            if (0 < a && a < 5) {
                 System.out.println("Верно");
             } else {
                 System.out.println("Неверно");
