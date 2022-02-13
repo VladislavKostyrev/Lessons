@@ -12,8 +12,8 @@ public class Task3_3 {
 
         for (int i = 0; i < numbers.length; i++) {
             int a = numbers[i];
-            String s = (0 < a && a < 5) ? (s = "Верно") : (s = "Не верно");
-            System.out.println(s);
+            String ss = (0 < a && a < 5) ? (ss = "Верно") : (ss = "Не верно");
+            System.out.println(ss);
         }
     }
 }
