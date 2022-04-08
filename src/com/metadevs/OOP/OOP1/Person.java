@@ -2,10 +2,7 @@ package com.metadevs.OOP.OOP1;
 
 import com.metadevs.OOP.OOP2.Worker;
 
-import java.util.Scanner;
-
 public class Person implements Worker {
-    static Scanner scanner = new Scanner(System.in);
     static private String companyName;
     private int age;
     private String name;
@@ -17,8 +14,8 @@ public class Person implements Worker {
     }
 
     {
-        name = "Unnamed person";
-        lastName = "Unnamed person";
+        name = "Absent name";
+        lastName = "Absent name";
         salary = 0;
     }
 
@@ -33,10 +30,15 @@ public class Person implements Worker {
 
     @Override
     public void setAge(int age) {
+        ageValidate(age);
+        this.age = age;
+    }
+
+    @Override
+    public void ageValidate(int age) throws AgeIsLessThen18Exception {
         if (age < 18) {
             throw new AgeIsLessThen18Exception("Возвраст сотрудника меньше 18-ти лет!");
         }
-        this.age = age;
     }
 
     @Override
@@ -66,10 +68,15 @@ public class Person implements Worker {
 
     @Override
     public void setSalary(double salary) {
+        salaryValidate(salary);
+        this.salary = salary;
+    }
+
+    @Override
+    public void salaryValidate(double salary) throws SalaryIsLessThen0Exception {
         if (salary < 0) {
             throw new SalaryIsLessThen0Exception("Зарплата сотрудника(цы) меньше нуля!");
         }
-        this.salary = salary;
     }
 
     @Override
@@ -77,8 +84,8 @@ public class Person implements Worker {
         return salary;
     }
 
-    public static void renameCompany() {
-        companyName = scanner.nextLine();
+    public static void renameCompany(String newCompanyName) {
+        companyName = newCompanyName;
     }
 
     public boolean isSalaryNotLessThenAge() {

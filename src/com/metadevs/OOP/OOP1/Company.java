@@ -13,16 +13,19 @@ public class Company implements IdealCompany {
         this.companyName = companyName;
     }
 
+    @Override
     public void hirePerson(Person person, double salary) {
         personList.add(person);
         person.setSalary(salary);
     }
 
+    @Override
     public void firePerson(Person person) {
         personList.remove(person);
         person.setSalary(0);
     }
 
+    @Override
     public void printAllPerson() {
         for (Person person : personList)
             System.out.println(person.getName() + " " + person.getLastName());
