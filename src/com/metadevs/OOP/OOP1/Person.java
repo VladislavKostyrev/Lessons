@@ -1,9 +1,6 @@
 package com.metadevs.OOP.OOP1;
 
-import java.util.Scanner;
-
 public class Person {
-    static Scanner scanner = new Scanner(System.in);
     static private String companyName;
     private int age;
     private String name;
@@ -23,18 +20,21 @@ public class Person {
     Person() {
     }
 
-    Person(int age, String name, String lastName, double salary) {
+    Person(int age, String name, String lastName) {
         setAge(age);
         setName(name);
         setLastName(lastName);
-        setSalary(salary);
     }
 
     public void setAge(int age) {
+        ageValidate(age);
+        this.age = age;
+    }
+
+    public void ageValidate(int age) throws AgeIsLessThen18Exception {
         if (age < 18) {
             throw new AgeIsLessThen18Exception("Возвраст сотрудника меньше 18-ти лет!");
         }
-        this.age = age;
     }
 
     public int getAge() {
@@ -58,18 +58,22 @@ public class Person {
     }
 
     public void setSalary(double salary) {
+        salaryValidate(salary);
+        this.salary = salary;
+    }
+
+    public void salaryValidate(double salary) throws SalaryIsLessThen0Exception {
         if (salary < 0) {
             throw new SalaryIsLessThen0Exception("Зарплата сотрудника(цы) меньше нуля!");
         }
-        this.salary = salary;
     }
 
     public double getSalary() {
         return salary;
     }
 
-    public static void renameCompany() {
-        companyName = scanner.nextLine();
+    public static void renameCompany(String newCompanyName) {
+        companyName = newCompanyName;
     }
 
     public boolean isSalaryNotLessThenAge() {
@@ -84,8 +88,8 @@ public class Person {
     }
 
     public static void main(String[] args) {
-        Person bob = new Person(28, "Bob", "Dylan", 300000);
-        Person alex = new Person(18, "Alex", "Navalny", 100);
+        Person bob = new Person(28, "Bob", "Dylan");
+        Person alex = new Person(18, "Alex", "Navalny");
 
         bob.companyName = "Boston Dynamics";
         alex.companyName = "DNS";
@@ -93,8 +97,8 @@ public class Person {
         salaryValidate(alex);
 
         Company Metadevs = new Company("Metadevs");
-        Metadevs.hirePerson(alex);
-        Metadevs.hirePerson(bob);
+        Metadevs.hirePerson(alex, 30000);
+        Metadevs.hirePerson(bob, 50);
         Metadevs.printAllPerson();
     }
 }

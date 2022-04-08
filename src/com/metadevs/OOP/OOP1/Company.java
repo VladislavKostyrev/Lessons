@@ -11,12 +11,14 @@ public class Company {
         this.companyName = companyName;
     }
 
-    public void hirePerson(Person person) {
+    public void hirePerson(Person person, double salary) {
         personList.add(person);
+        person.setSalary(salary);
     }
 
     public void firePerson(Person person) {
         personList.remove(person);
+        person.setSalary(0);
     }
 
     public void printAllPerson() {
