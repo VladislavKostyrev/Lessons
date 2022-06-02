@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Company {
     String companyName;
-    private List<Person> personList = new ArrayList<>();
+    public List<Person> personList = new ArrayList<>();
 
-    Company (String companyName){
+    Company(String companyName) {
         this.companyName = companyName;
     }
 
@@ -22,7 +22,7 @@ public class Company {
     }
 
     public void printAllPerson() {
-        for(Person person : personList)
+        for (Person person : personList)
             System.out.println(person.getName() + " " + person.getLastName());
     }
 }

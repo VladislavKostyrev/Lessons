@@ -33,7 +33,7 @@ public class Person {
 
     public void ageValidate(int age) throws AgeIsLessThen18Exception {
         if (age < 18) {
-            throw new AgeIsLessThen18Exception("Возвраст сотрудника меньше 18-ти лет!");
+            throw new AgeIsLessThen18Exception("Возраст сотрудника меньше 18-ти лет!");
         }
     }
 
@@ -58,33 +58,27 @@ public class Person {
     }
 
     public void setSalary(double salary) {
-        salaryValidate(salary);
+        salaryValidate();
         this.salary = salary;
-    }
-
-    public void salaryValidate(double salary) throws SalaryIsLessThen0Exception {
-        if (salary < 0) {
-            throw new SalaryIsLessThen0Exception("Зарплата сотрудника(цы) меньше нуля!");
-        }
     }
 
     public double getSalary() {
         return salary;
     }
 
-    public static void renameCompany(String newCompanyName) {
-        companyName = newCompanyName;
-    }
-
     public boolean isSalaryNotLessThenAge() {
         return salary >= age;
     }
 
-    public static void salaryValidate(Person person) {
-        if (!(person.isSalaryNotLessThenAge())) {
-            throw new SalaryLessOrEqualThenAgeException("ВНИМАНИЕ! Зарплата сотрудника(цы) меньше или ровна его(её) возврасту! СРОЧНО ПОВЫСЬТЕ ЗАРПЛАТУ!!!");
+    public void salaryValidate() {
+        if (!(isSalaryNotLessThenAge())) {
+            throw new SalaryLessOrEqualThenAgeException("ВНИМАНИЕ! Зарплата сотрудника(цы) меньше или ровна его(её) возрасту! СРОЧНО ПОВЫСЬТЕ ЗАРПЛАТУ!!!");
         }
-        System.out.println("Порядок. Зарплата сотрудника(цы) не меньше его(её) возвраста.");
+        System.out.println("Порядок. Зарплата сотрудника(цы) не меньше его(её) возраста.");
+    }
+
+    public static void renameCompany(String newCompanyName) {
+        companyName = newCompanyName;
     }
 
     public static void main(String[] args) {
@@ -94,11 +88,5 @@ public class Person {
         bob.companyName = "Boston Dynamics";
         alex.companyName = "DNS";
         System.out.println(bob.companyName + "\n" + alex.companyName);
-        salaryValidate(alex);
-
-        Company Metadevs = new Company("Metadevs");
-        Metadevs.hirePerson(alex, 30000);
-        Metadevs.hirePerson(bob, 50);
-        Metadevs.printAllPerson();
     }
 }
