@@ -1,15 +1,9 @@
 package com.metadevs.OOP.OOP1;
 
-import com.metadevs.OOP.OOP2.Worker;
+import com.metadevs.OOP.OOP4.Citizen;
 
-import java.util.Scanner;
-
-public class Person implements Worker {
-    static Scanner scanner = new Scanner(System.in);
+public class Person extends Citizen {
     static private String companyName;
-    private int age;
-    private String name;
-    private String lastName;
     private double salary;
 
     static {
@@ -17,8 +11,8 @@ public class Person implements Worker {
     }
 
     {
-        name = "Unnamed person";
-        lastName = "Unnamed person";
+        name = "Absent name";
+        lastName = "Absent name";
         salary = 0;
     }
 
@@ -26,17 +20,20 @@ public class Person implements Worker {
     }
 
     public Person(int age, String name, String lastName) {
-        setAge(age);
-        setName(name);
-        setLastName(lastName);
+        super(age, name, lastName);
     }
 
     @Override
     public void setAge(int age) {
-        if (age < 18) {
-            throw new AgeIsLessThen18Exception("Возвраст сотрудника меньше 18-ти лет!");
-        }
+        ageValidate(age);
         this.age = age;
+    }
+
+    @Override
+    public void ageValidate(int age) throws AgeIsLessThen18Exception {
+        if (age < 18) {
+            throw new AgeIsLessThen18Exception("Возраст сотрудника меньше 18-ти лет!");
+        }
     }
 
     @Override
@@ -66,10 +63,21 @@ public class Person implements Worker {
 
     @Override
     public void setSalary(double salary) {
-        if (salary < 0) {
-            throw new SalaryIsLessThen0Exception("Зарплата сотрудника(цы) меньше нуля!");
-        }
+        salaryValidate();
         this.salary = salary;
+    }
+
+    @Override
+    public boolean isSalaryNotLessThenAge() {
+        return getSalary() >= getAge();
+    }
+
+    @Override
+    public void salaryValidate() throws SalaryLessOrEqualThenAgeException {
+        if (!(isSalaryNotLessThenAge())) {
+            throw new SalaryLessOrEqualThenAgeException("ВНИМАНИЕ! Зарплата сотрудника(цы) меньше или ровна его(её) возрасту! СРОЧНО ПОВЫСЬТЕ ЗАРПЛАТУ!!!");
+        }
+        System.out.println("Порядок. Зарплата сотрудника(цы) не меньше его(её) возраста.");
     }
 
     @Override
@@ -77,29 +85,7 @@ public class Person implements Worker {
         return salary;
     }
 
-    public static void renameCompany() {
-        companyName = scanner.nextLine();
-    }
-
-    public boolean isSalaryNotLessThenAge() {
-        return getSalary() >= getAge();
-    }
-
-    public static void salaryValidate(Person person) throws SalaryLessOrEqualThenAgeException {
-        if (!(person.isSalaryNotLessThenAge())) {
-            throw new SalaryLessOrEqualThenAgeException("ВНИМАНИЕ! Зарплата сотрудника(цы) меньше или ровна его(её) возврасту! СРОЧНО ПОВЫСЬТЕ ЗАРПЛАТУ!!!");
-        }
-        System.out.println("Порядок. Зарплата сотрудника(цы) не меньше его(её) возвраста.");
-    }
-
-    public static void main(String[] args) {
-        Person bob = new Person(28, "Bob", "Dylan");
-        Person alex = new Person(18, "Alex", "Navalny");
-
-        Company Metadevs = new Company("Metadevs");
-        Metadevs.hirePerson(alex, 300000);
-        Metadevs.hirePerson(bob, 200);
-        Metadevs.printAllPerson();
-        salaryValidate(bob);
+    public static void renameCompany(String newCompanyName) {
+        companyName = newCompanyName;
     }
 }
