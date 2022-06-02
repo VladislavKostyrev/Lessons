@@ -37,7 +37,7 @@ public class Person implements Worker {
     @Override
     public void ageValidate(int age) throws AgeIsLessThen18Exception {
         if (age < 18) {
-            throw new AgeIsLessThen18Exception("Возвраст сотрудника меньше 18-ти лет!");
+            throw new AgeIsLessThen18Exception("Возраст сотрудника меньше 18-ти лет!");
         }
     }
 
@@ -68,15 +68,21 @@ public class Person implements Worker {
 
     @Override
     public void setSalary(double salary) {
-        salaryValidate(salary);
+        salaryValidate();
         this.salary = salary;
     }
 
     @Override
-    public void salaryValidate(double salary) throws SalaryIsLessThen0Exception {
-        if (salary < 0) {
-            throw new SalaryIsLessThen0Exception("Зарплата сотрудника(цы) меньше нуля!");
+    public boolean isSalaryNotLessThenAge() {
+        return getSalary() >= getAge();
+    }
+
+    @Override
+    public void salaryValidate() throws SalaryLessOrEqualThenAgeException {
+        if (!(isSalaryNotLessThenAge())) {
+            throw new SalaryLessOrEqualThenAgeException("ВНИМАНИЕ! Зарплата сотрудника(цы) меньше или ровна его(её) возрасту! СРОЧНО ПОВЫСЬТЕ ЗАРПЛАТУ!!!");
         }
+        System.out.println("Порядок. Зарплата сотрудника(цы) не меньше его(её) возраста.");
     }
 
     @Override
@@ -88,25 +94,4 @@ public class Person implements Worker {
         companyName = newCompanyName;
     }
 
-    public boolean isSalaryNotLessThenAge() {
-        return getSalary() >= getAge();
-    }
-
-    public static void salaryValidate(Person person) throws SalaryLessOrEqualThenAgeException {
-        if (!(person.isSalaryNotLessThenAge())) {
-            throw new SalaryLessOrEqualThenAgeException("ВНИМАНИЕ! Зарплата сотрудника(цы) меньше или ровна его(её) возврасту! СРОЧНО ПОВЫСЬТЕ ЗАРПЛАТУ!!!");
-        }
-        System.out.println("Порядок. Зарплата сотрудника(цы) не меньше его(её) возвраста.");
-    }
-
-    public static void main(String[] args) {
-        Person bob = new Person(28, "Bob", "Dylan");
-        Person alex = new Person(18, "Alex", "Navalny");
-
-        Company Metadevs = new Company("Metadevs");
-        Metadevs.hirePerson(alex, 300000);
-        Metadevs.hirePerson(bob, 200);
-        Metadevs.printAllPerson();
-        salaryValidate(bob);
-    }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Company implements IdealCompany {
     String companyName;
-    private List<Person> personList = new ArrayList<>();
+    public List<Person> personList = new ArrayList<>();
 
     Company(String companyName) {
         this.companyName = companyName;

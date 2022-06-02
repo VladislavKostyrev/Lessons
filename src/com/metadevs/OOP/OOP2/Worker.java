@@ -1,7 +1,7 @@
 package com.metadevs.OOP.OOP2;
 
 import com.metadevs.OOP.OOP1.AgeIsLessThen18Exception;
-import com.metadevs.OOP.OOP1.SalaryIsLessThen0Exception;
+import com.metadevs.OOP.OOP1.SalaryLessOrEqualThenAgeException;
 
 public interface Worker {
     public void setAge(int age);
@@ -20,7 +20,9 @@ public interface Worker {
 
     public void setSalary(double salary);
 
-    public void salaryValidate(double salary) throws SalaryIsLessThen0Exception;
+    boolean isSalaryNotLessThenAge();
 
     public double getSalary();
+
+    void salaryValidate() throws SalaryLessOrEqualThenAgeException;
 }
